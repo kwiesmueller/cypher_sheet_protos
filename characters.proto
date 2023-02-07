@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package characters;
+
+import "character.proto";
+
+service Characters {
+  rpc WriteCharacterRevision(WriteCharacter) returns (CharacterWritten);
+}
+
+message WriteCharacter {
+  character.Character character = 1;
+  int64 revision = 2;
+}
+
+message CharacterWritten { string uuid = 1; }
