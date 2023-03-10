@@ -5,12 +5,41 @@ package characters;
 import "character.proto";
 
 service Characters {
-  rpc WriteCharacterRevision(WriteCharacter) returns (CharacterWritten);
+  rpc Create(CreateCharacter) returns (CharacterCreated);
+  rpc WriteCharacterRevision(WriteRevision) returns (RevisionWritten);
+  rpc ReadCharacterRevision(ReadRevision) returns (RevisionRead);
+  rpc ReadLatestCharacterRevision(ReadLatestRevision) returns (RevisionRead);
+  rpc Delete(DeleteCharacter) returns (CharacterDeleted);
 }
 
-message WriteCharacter {
-  character.Character character = 1;
-  int64 revision = 2;
+message CreateCharacter {}
+
+message CharacterCreated { string uuid = 1; }
+
+message WriteRevision {
+  string uuid = 1;
+  character.Character character = 2;
+  uint64 revision = 3;
 }
 
-message CharacterWritten { string uuid = 1; }
+message RevisionWritten {
+  string uuid = 1;
+  uint64 revision = 2;
+}
+
+message ReadRevision {
+  string uuid = 1;
+  uint64 revision = 2;
+}
+
+message RevisionRead {
+  string uuid = 1;
+  uint64 revision = 2;
+  character.Character character = 3;
+}
+
+message ReadLatestRevision { string uuid = 1; }
+
+message DeleteCharacter { string uuid = 1; }
+
+message CharacterDeleted {}
