@@ -5,11 +5,18 @@ package characters;
 import "character.proto";
 
 service Characters {
+  rpc List(ListCharacters) returns (CharactersListed);
   rpc Create(CreateCharacter) returns (CharacterCreated);
   rpc WriteCharacterRevision(WriteRevision) returns (RevisionWritten);
   rpc ReadCharacterRevision(ReadRevision) returns (RevisionRead);
   rpc ReadLatestCharacterRevision(ReadLatestRevision) returns (RevisionRead);
   rpc Delete(DeleteCharacter) returns (CharacterDeleted);
+}
+
+message ListCharacters {}
+
+message CharactersListed {
+  repeated character.CharacterMetadata characters = 1;
 }
 
 message CreateCharacter {}

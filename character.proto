@@ -11,6 +11,17 @@ message CharacterMetadata {
   // but only generated at runtime
   repeated int32 revisions = 3;
   int32 storage_size = 4;
+
+  CharacterSyncSettings sync_settings = 6;
+}
+
+message CharacterSyncSettings {
+  // The below fields are only used if the character is synced to a remote
+  // service.
+  string sync_server = 1;
+  // The sync service will assign a different UUID to the character to ensure
+  // each character stored on it is using a unique id.
+  string remote_uuid = 2;
 }
 
 message Character {
